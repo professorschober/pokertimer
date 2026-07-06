@@ -8,16 +8,20 @@ function levelDurationSeconds(level: BlindLevel): number {
   return Math.max(1, level.durationMinutes) * 60;
 }
 
+function normalizeChipValue(value: number): number {
+  return Math.max(0, Math.round(value / 10) * 10);
+}
+
 function normalizeLevel(level: BlindLevel): BlindLevel {
-  const smallBlind = Math.max(0, Math.floor(level.smallBlind));
-  const bigBlind = Math.max(smallBlind, Math.floor(level.bigBlind));
+  const smallBlind = normalizeChipValue(level.smallBlind);
+  const bigBlind = Math.max(smallBlind, normalizeChipValue(level.bigBlind));
 
   return {
     level: level.level,
     durationMinutes: Math.max(1, Math.floor(level.durationMinutes)),
     smallBlind,
     bigBlind,
-    ante: Math.max(0, Math.floor(level.ante))
+    ante: normalizeChipValue(level.ante)
   };
 }
 

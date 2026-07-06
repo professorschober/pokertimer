@@ -15,11 +15,14 @@ const fieldLabels: Record<NumericField, string> = {
 };
 
 export function BlindLevelEditor({ level, onChange }: BlindLevelEditorProps) {
+  const normalizeChipValue = (value: number) => Math.max(0, Math.round(value / 10) * 10);
+
   const handleNumberChange = (field: NumericField, value: string) => {
     const parsedValue = Number.parseInt(value, 10);
     const safeValue = Number.isNaN(parsedValue) ? 0 : parsedValue;
     const minimum = field === "durationMinutes" ? 1 : 0;
-    const updatedLevel = { ...level, [field]: Math.max(minimum, safeValue) };
+    const nextValue = field === "durationMinutes" ? Math.max(minimum, safeValue) : normalizeChipValue(safeValue);
+    const updatedLevel = { ...level, [field]: nextValue };
 
     if (field === "smallBlind" && updatedLevel.bigBlind < updatedLevel.smallBlind) {
       updatedLevel.bigBlind = updatedLevel.smallBlind;
@@ -41,7 +44,7 @@ export function BlindLevelEditor({ level, onChange }: BlindLevelEditorProps) {
           <input
             type="number"
             min={field === "durationMinutes" ? 1 : 0}
-            step="1"
+            step={field === "durationMinutes" ? 1 : 10}
             value={level[field]}
             onChange={(event) => handleNumberChange(field, event.target.value)}
           />
