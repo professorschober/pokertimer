@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import type { BlindLevel } from "../types/BlindLevel";
 import { BlindLevelEditor } from "./BlindLevelEditor";
 
+const durationPresets = [5, 10, 15, 20];
+
 type SettingsModalProps = {
   isOpen: boolean;
   levels: BlindLevel[];
@@ -28,6 +30,15 @@ export function SettingsModal({ isOpen, levels, onSave, onClose }: SettingsModal
     );
   };
 
+  const handleDurationPreset = (durationMinutes: number) => {
+    setDraftLevels((previousLevels) =>
+      previousLevels.map((level) => ({
+        ...level,
+        durationMinutes
+      }))
+    );
+  };
+
   const handleSave = () => {
     onSave(draftLevels);
     onClose();
@@ -41,6 +52,16 @@ export function SettingsModal({ isOpen, levels, onSave, onClose }: SettingsModal
           <button type="button" aria-label="Einstellungen schließen" onClick={onClose}>
             Schließen
           </button>
+        </div>
+        <div className="duration-presets" aria-label="Timerdauer für alle Stufen setzen">
+          <span>Timerdauer für alle Stufen</span>
+          <div>
+            {durationPresets.map((durationMinutes) => (
+              <button key={durationMinutes} type="button" onClick={() => handleDurationPreset(durationMinutes)}>
+                {durationMinutes}:00
+              </button>
+            ))}
+          </div>
         </div>
         <div className="level-editor-list">
           {draftLevels.map((level) => (

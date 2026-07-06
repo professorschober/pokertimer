@@ -8,7 +8,7 @@ type BlindLevelEditorProps = {
 type NumericField = "durationMinutes" | "smallBlind" | "bigBlind" | "ante";
 
 const fieldLabels: Record<NumericField, string> = {
-  durationMinutes: "Dauer",
+  durationMinutes: "Dauer (Min.)",
   smallBlind: "Small Blind",
   bigBlind: "Big Blind",
   ante: "Ante"

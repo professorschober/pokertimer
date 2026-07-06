@@ -172,7 +172,7 @@ input:focus-visible {
 
 .settings-modal {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   width: min(1180px, 100%);
   max-height: min(92vh, 860px);
   border: 1px solid rgba(247, 243, 232, 0.18);
@@ -197,6 +197,33 @@ input:focus-visible {
 .modal-header h2 {
   margin: 0;
   font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.duration-presets {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(247, 243, 232, 0.12);
+  padding: 1rem;
+  background: #111111;
+}
+
+.duration-presets span {
+  color: #d7a947;
+  font-weight: 800;
+}
+
+.duration-presets div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.duration-presets button {
+  min-width: 5.25rem;
+  padding: 0.7rem 0.95rem;
 }
 
 .level-editor-list {
@@ -261,9 +288,18 @@ input:focus-visible {
   }
 
   .modal-header,
+  .duration-presets,
   .modal-actions {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .duration-presets div {
+    justify-content: stretch;
+  }
+
+  .duration-presets button {
+    flex: 1 1 7rem;
   }
 
   .modal-header button,
