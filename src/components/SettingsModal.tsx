@@ -44,6 +44,10 @@ export function SettingsModal({ isOpen, levels, onSave, onClose }: SettingsModal
     onClose();
   };
 
+  const activeDurationPreset = durationPresets.find((durationMinutes) =>
+    draftLevels.every((level) => level.durationMinutes === durationMinutes)
+  );
+
   return (
     <div className="modal-backdrop" role="presentation">
       <section className="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
@@ -57,7 +61,13 @@ export function SettingsModal({ isOpen, levels, onSave, onClose }: SettingsModal
           <span>Timerdauer für alle Stufen</span>
           <div>
             {durationPresets.map((durationMinutes) => (
-              <button key={durationMinutes} type="button" onClick={() => handleDurationPreset(durationMinutes)}>
+              <button
+                key={durationMinutes}
+                type="button"
+                className={activeDurationPreset === durationMinutes ? "duration-preset-active" : undefined}
+                aria-pressed={activeDurationPreset === durationMinutes}
+                onClick={() => handleDurationPreset(durationMinutes)}
+              >
                 {durationMinutes}:00
               </button>
             ))}

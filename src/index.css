@@ -226,6 +226,20 @@ input:focus-visible {
   padding: 0.7rem 0.95rem;
 }
 
+.duration-presets .duration-preset-active {
+  border-color: #d7a947;
+  background: rgba(215, 169, 71, 0.16);
+  box-shadow:
+    0 0 0 2px rgba(215, 169, 71, 0.34),
+    0 0 1.5rem rgba(215, 169, 71, 0.18);
+  color: #ffffff;
+}
+
+.duration-presets .duration-preset-active:hover {
+  border-color: #edbf58;
+  background: rgba(215, 169, 71, 0.22);
+}
+
 .level-editor-list {
   display: grid;
   gap: 0.6rem;
