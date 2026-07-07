@@ -5,5 +5,7 @@ type TimerDisplayProps = {
 };
 
 export function TimerDisplay({ secondsRemaining }: TimerDisplayProps) {
-  return <div className="timer-display">{formatTime(secondsRemaining)}</div>;
+  const isWarningTime = secondsRemaining > 0 && secondsRemaining <= 15;
+
+  return <div className={`timer-display${isWarningTime ? " timer-display-warning" : ""}`}>{formatTime(secondsRemaining)}</div>;
 }

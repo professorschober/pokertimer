@@ -132,6 +132,14 @@ input:focus-visible {
   line-height: 0.9;
   letter-spacing: 0;
   text-shadow: 0 0 2rem rgba(215, 169, 71, 0.16);
+  transition:
+    color 180ms ease,
+    text-shadow 180ms ease;
+}
+
+.timer-display-warning {
+  color: #ff3b30;
+  text-shadow: 0 0 2.2rem rgba(255, 59, 48, 0.42);
 }
 
 .finished-message {
