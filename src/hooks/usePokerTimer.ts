@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { defaultBlindLevels } from "../data/defaultBlindLevels";
 import type { BlindLevel } from "../types/BlindLevel";
 
-const STORAGE_KEY = "poker-timer-levels";
+const STORAGE_KEY = "poker-timer-levels-v2";
+const LEGACY_STORAGE_KEYS = ["poker-timer-levels"];
 
 function levelDurationSeconds(level: BlindLevel): number {
   return Math.max(1, level.durationMinutes) * 60;
@@ -46,6 +47,7 @@ function loadStoredLevels(): BlindLevel[] {
     const storedLevels = window.localStorage.getItem(STORAGE_KEY);
 
     if (!storedLevels) {
+      LEGACY_STORAGE_KEYS.forEach((storageKey) => window.localStorage.removeItem(storageKey));
       return defaultBlindLevels;
     }
 

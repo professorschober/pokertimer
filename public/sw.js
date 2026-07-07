@@ -1,4 +1,4 @@
-const CACHE_NAME = "poker-timer-v1";
+const CACHE_NAME = "poker-timer-v2";
 const APP_SHELL = ["/", "/index.html", "/manifest.webmanifest", "/icons/poker-chip.svg"];
 
 self.addEventListener("install", (event) => {
