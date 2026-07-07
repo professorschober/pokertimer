@@ -7,18 +7,21 @@ const durationPresets = [5, 10, 15, 20];
 type SettingsModalProps = {
   isOpen: boolean;
   levels: BlindLevel[];
-  onSave: (levels: BlindLevel[]) => void;
+  isWarningBeepEnabled: boolean;
+  onSave: (levels: BlindLevel[], isWarningBeepEnabled: boolean) => void;
   onClose: () => void;
 };
 
-export function SettingsModal({ isOpen, levels, onSave, onClose }: SettingsModalProps) {
+export function SettingsModal({ isOpen, levels, isWarningBeepEnabled, onSave, onClose }: SettingsModalProps) {
   const [draftLevels, setDraftLevels] = useState<BlindLevel[]>(levels);
+  const [draftWarningBeepEnabled, setDraftWarningBeepEnabled] = useState(isWarningBeepEnabled);
 
   useEffect(() => {
     if (isOpen) {
       setDraftLevels(levels.map((level) => ({ ...level })));
+      setDraftWarningBeepEnabled(isWarningBeepEnabled);
     }
-  }, [isOpen, levels]);
+  }, [isOpen, isWarningBeepEnabled, levels]);
 
   if (!isOpen) {
     return null;
@@ -40,7 +43,7 @@ export function SettingsModal({ isOpen, levels, onSave, onClose }: SettingsModal
   };
 
   const handleSave = () => {
-    onSave(draftLevels);
+    onSave(draftLevels, draftWarningBeepEnabled);
     onClose();
   };
 
@@ -72,6 +75,16 @@ export function SettingsModal({ isOpen, levels, onSave, onClose }: SettingsModal
               </button>
             ))}
           </div>
+        </div>
+        <div className="settings-options">
+          <label className="settings-toggle">
+            <input
+              type="checkbox"
+              checked={draftWarningBeepEnabled}
+              onChange={(event) => setDraftWarningBeepEnabled(event.target.checked)}
+            />
+            <span>Piepsen in den letzten 15 Sekunden</span>
+          </label>
         </div>
         <div className="level-editor-list">
           {draftLevels.map((level) => (

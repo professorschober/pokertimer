@@ -13,12 +13,13 @@ function App() {
     currentLevelIndex,
     secondsRemaining,
     isRunning,
+    isWarningBeepEnabled,
     levels,
     start,
     pause,
     reset,
     nextLevel,
-    updateLevels
+    updateSettings
   } = usePokerTimer();
 
   const isTournamentFinished = secondsRemaining === 0 && currentLevelIndex === levels.length - 1 && !isRunning;
@@ -42,7 +43,8 @@ function App() {
       <SettingsModal
         isOpen={isSettingsOpen}
         levels={levels}
-        onSave={updateLevels}
+        isWarningBeepEnabled={isWarningBeepEnabled}
+        onSave={updateSettings}
         onClose={() => setIsSettingsOpen(false)}
       />
     </main>
